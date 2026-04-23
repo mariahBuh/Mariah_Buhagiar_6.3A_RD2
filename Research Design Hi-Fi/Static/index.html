@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="script.js" defer></script>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="nav-item active" data-nav="Dashboard" style="  background: var(--blue-accent);
+  color: white;">
+    <img src="images/dashboard.png" alt="Dashboard Icon">
+  </div>
+  <div class="nav-item" data-nav="Wallet">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7H3a1 1 0 00-1 1v10a2 2 0 002 2h16a2 2 0 002-2V8a1 1 0 00-1-1zm-1 11H4V9h16v9zM3 5h15a1 1 0 000-2H4a2 2 0 00-2 2v1h1V5z"/><circle cx="17" cy="13.5" r="1.5"/></svg>
+  </div>
+  <div class="nav-item" data-nav="Transactions">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+  </div>
+  <div class="nav-item" data-nav="Analytics">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+  </div>
+  <div class="nav-item" data-nav="Profile">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.71 0 4.92-2.21 4.92-4.92S14.71 2.16 12 2.16 7.08 4.37 7.08 7.08 9.29 12 12 12zm0 2.46c-3.28 0-9.84 1.65-9.84 4.92v2.46h19.68v-2.46c0-3.27-6.56-4.92-9.84-4.92z"/></svg>
+  </div>
+  <div class="nav-item" data-nav="Settings">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.57 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+  </div>
+</aside>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search Here">
+  </div>
+  <button class="search-btn">
+    <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  </button>
+  <div class="topbar-right">
+    <div class="icon-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="avatar">
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.71 0 4.92-2.21 4.92-4.92S14.71 2.16 12 2.16 7.08 4.37 7.08 7.08 9.29 12 12 12zm0 2.46c-3.28 0-9.84 1.65-9.84 4.92v2.46h19.68v-2.46c0-3.27-6.56-4.92-9.84-4.92z"/></svg>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="subtitle">Welcome Back Jane <br> <img src="images/Vector.png" alt="Waving hand"></p>
+    </div>
+    <div class="breadcrumb">
+      <span>Home</span>
+      <span class="sep">›</span>
+      <span class="current">Dashboard</span>
+    </div>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="label">Total Balance</div>
+      <div class="value">€ 1004</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Total Income</div>
+      <div class="value">€ 3088</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Total Expenses</div>
+      <div class="value">€ 550</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Savings</div>
+      <div class="value">€ 24,560</div>
+    </div>
+  </div>
+
+  <!-- MID ROW: SPENT + BREAKDOWN -->
+  <div class="mid-row">
+    <!-- Spent this month -->
+    <div class="card spent-card">
+      <div class="spent-header">
+        <div>
+          <div class="label" style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;">Spent this month</div>
+          <div class="spent-amount">€ 700</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+          <div class="last-month">Last Month<span>€ 900</span></div>
+
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Monthly Expenses Breakdown -->
+    <div class="card">
+      <div class="card-title">Monthly Expenses Breakdown</div>
+      <div class="breakdown-bar"></div>
+      <div class="breakdown-list">
+        <div class="breakdown-item">
+          <div class="left"><span class="dot" style="background:#f97316"></span><span class="name">Food</span></div>
+          <div class="right"><span class="amount">€1,200</span><span class="pct">38%</span></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="left"><span class="dot" style="background:#eab308"></span><span class="name">Transport</span></div>
+          <div class="right"><span class="amount">€700</span><span class="pct">22%</span></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="left"><span class="dot" style="background:#f59e0b"></span><span class="name">Healthcare</span></div>
+          <div class="right"><span class="amount">€400</span><span class="pct">12%</span></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="left"><span class="dot" style="background:#22c55e"></span><span class="name">Education</span></div>
+          <div class="right"><span class="amount">€300</span><span class="pct">9%</span></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="left"><span class="dot" style="background:#0dbfad"></span><span class="name">Clothes</span></div>
+          <div class="right"><span class="amount">€250</span><span class="pct">8%</span></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="left"><span class="dot" style="background:#3b82f6"></span><span class="name">Pets</span></div>
+          <div class="right"><span class="amount">€180</span><span class="pct">6%</span></div>
+        </div>
+        <div class="breakdown-item">
+          <div class="left"><span class="dot" style="background:#94a3b8"></span><span class="name">Entertainment</span></div>
+          <div class="right"><span class="amount">€150</span><span class="pct">5%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW: UPCOMING + BAR CHART -->
+  <div class="bot-row">
+    <!-- Upcoming Payments -->
+    <div class="card">
+      <div class="card-title">Upcoming Payments</div>
+
+      <div class="payment-item">
+        <div class="left">
+          <div class="pay-icon" style="background:#000;font-size:18px;"><img src="images/apple.png" alt="Apple Logo"></div>
+          <div class="pay-info">
+            <div class="name">Apple</div>
+            <div class="due">Due in 12 days</div>
+          </div>
+        </div>
+        <div class="pay-amount">€ 2.99</div>
+      </div>
+
+      <div class="payment-item">
+        <div class="left">
+          <div class="pay-icon" style="background:#fff;border:1px solid var(--border);"><img src="images/google.png" alt="Google Photos Logo"></div>
+          <div class="pay-info">
+            <div class="name">Google Photos</div>
+            <div class="due">Due in 12 days</div>
+          </div>
+        </div>
+        <div class="pay-amount">€ 5.99</div>
+      </div>
+
+      <div class="payment-item">
+        <div class="left">
+          <div class="pay-icon" "><img src="images/spotify.png" alt="Spotify Logo"></div>
+          <div class="pay-info">
+            <div class="name">Spotify</div>
+            <div class="due">Due in 12 days</div>
+          </div>
+        </div>
+        <div class="pay-amount">€ 12.99</div>
+      </div>
+
+      <div class="add-transfer" id="addTransferBtn">
+        <div class="plus-circle">+</div>
+        <div class="info">
+          <div class="name">Schedule New Transfer</div>
+          <div class="sub">Add a new scheduled transfer</div>
+        </div>
+      </div>
+
+      <div class="add-transfer-form" id="transferForm">
+        <div class="form-row">
+          <input type="text" placeholder="Service name" id="tf-name">
+          <input type="text" placeholder="Amount (€)" id="tf-amount">
+        </div>
+        <div class="form-row">
+          <select id="tf-due">
+            <option value="">Due in…</option>
+            <option>Due in 7 days</option>
+            <option>Due in 14 days</option>
+            <option>Due in 30 days</option>
+          </select>
+          <select id="tf-recur">
+            <option value="">Frequency</option>
+            <option>Monthly</option>
+            <option>Yearly</option>
+            <option>One-time</option>
+          </select>
+        </div>
+        <div class="btn-row">
+          <button class="btn-save" id="tf-save">Save Transfer</button>
+          <button class="btn-cancel" id="tf-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monthly Income vs Expenses -->
+    <div class="card">
+      <div class="card-title">Monthly Income vs Expenses</div>
+      <div class="bar-chart-wrap">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRANSACTION HISTORY -->
+  <div class="card tx-card">
+    <div class="card-title">Transaction History</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th style="text-align:right">Currency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tx-row" data-id="1" data-cat="Beauty" data-desc="Haircut Skincare Products">
+          <td><div class="tx-cat"><div class="tx-icon" style="background:#fce7f3;">💄</div><span>Beauty</span></div></td>
+          <td class="tx-date">22.04.2026</td>
+          <td class="tx-desc">Haircut &amp; Skincare Products</td>
+          <td class="tx-amount">-45.00</td>
+          <td class="tx-currency" style="text-align:right">EUR</td>
+        </tr>
+        <tr class="tx-detail-row"><td colspan="5"><div class="tx-detail-inner" id="inner-1"><span><strong>Status:</strong> Completed</span><span><strong>Merchant:</strong> Local Salon</span><span><strong>Payment:</strong> Card •••• 4212</span></div></td></tr>
+
+        <tr class="tx-row" data-id="2" data-cat="Bills Fees" data-desc="Monthly Internet Subscription">
+          <td><div class="tx-cat"><div class="tx-icon" style="background:#e0f2fe;">📋</div><span>Bills &amp; Fees</span></div></td>
+          <td class="tx-date">20.04.2026</td>
+          <td class="tx-desc">Monthly Internet Subscription</td>
+          <td class="tx-amount">-60.00</td>
+          <td class="tx-currency" style="text-align:right">EUR</td>
+        </tr>
+        <tr class="tx-detail-row"><td colspan="5"><div class="tx-detail-inner" id="inner-2"><span><strong>Status:</strong> Completed</span><span><strong>Merchant:</strong> Melita</span><span><strong>Payment:</strong> Card •••• 4212</span></div></td></tr>
+
+        <tr class="tx-row" data-id="3" data-cat="Car" data-desc="Fuel Car Wash">
+          <td><div class="tx-cat"><div class="tx-icon" style="background:#dbeafe;">🚗</div><span>Car</span></div></td>
+          <td class="tx-date">20.04.2026</td>
+          <td class="tx-desc">Fuel &amp; Car Wash</td>
+          <td class="tx-amount">-30.50</td>
+          <td class="tx-currency" style="text-align:right">EUR</td>
+        </tr>
+        <tr class="tx-detail-row"><td colspan="5"><div class="tx-detail-inner" id="inner-3"><span><strong>Status:</strong> Completed</span><span><strong>Merchant:</strong> Enemed</span><span><strong>Payment:</strong> Card •••• 4212</span></div></td></tr>
+
+        <tr class="tx-row" data-id="4" data-cat="Education" data-desc="Online Course Subscription">
+          <td><div class="tx-cat"><div class="tx-icon" style="background:#d1fae5;">🎓</div><span>Education</span></div></td>
+          <td class="tx-date">20.04.2026</td>
+          <td class="tx-desc">Online Course Subscription</td>
+          <td class="tx-amount">-25.00</td>
+          <td class="tx-currency" style="text-align:right">EUR</td>
+        </tr>
+        <tr class="tx-detail-row"><td colspan="5"><div class="tx-detail-inner" id="inner-4"><span><strong>Status:</strong> Completed</span><span><strong>Merchant:</strong> Udemy</span><span><strong>Payment:</strong> PayPal</span></div></td></tr>
+
+        <tr class="tx-row" data-id="5" data-cat="Entertainment" data-desc="Movie Streaming Service">
+          <td><div class="tx-cat"><div class="tx-icon" style="background:#ede9fe;">🎬</div><span>Entertainment</span></div></td>
+          <td class="tx-date">17.04.2026</td>
+          <td class="tx-desc">Movie &amp; Streaming Service</td>
+          <td class="tx-amount">-12.99</td>
+          <td class="tx-currency" style="text-align:right">EUR</td>
+        </tr>
+        <tr class="tx-detail-row"><td colspan="5"><div class="tx-detail-inner" id="inner-5"><span><strong>Status:</strong> Completed</span><span><strong>Merchant:</strong> Netflix</span><span><strong>Payment:</strong> Card •••• 4212</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>Mariah Buhagiar CCD6.3A</footer>
+</body>
+</html>
