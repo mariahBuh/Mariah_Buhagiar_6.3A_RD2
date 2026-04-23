@@ -23,7 +23,7 @@
   --text-muted: #64748b;
   --white: #ffffff;
   --sidebar-w: 60px;
-  --card-radius:6px;
+  --card-radius: 6px;
 }
 
 body {
@@ -142,6 +142,11 @@ body {
   fill: white;
 }
 
+.search-btn:hover {
+  background: var(--blue-accent);
+  transition: background 0.2s ease;
+}
+
 .topbar-right {
   margin-left: auto;
   display: flex;
@@ -162,6 +167,8 @@ body {
 
 .icon-btn:hover {
   background: var(--gray-light);
+  transition: background 0.4s ease;
+
 }
 .icon-btn svg {
   width: 20px;
@@ -544,143 +551,181 @@ tbody td {
   font-size: 12px;
 }
 
-/* ── INTERACTIONS ── */
+/* ── ANIMATIONS & INTERACTIONS ── */
 
-/* Stat card selected state */
-.stat-card:hover {
-  border-color: var(--blue-accent);
-  box-shadow: 0 4px 12px rgba(45,76,200,0.10);
+/* Keyframes */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.88); }
+  70%  { transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(45,76,200,0.35); }
+  70%  { box-shadow: 0 0 0 8px rgba(45,76,200,0); }
+  100% { box-shadow: 0 0 0 0 rgba(45,76,200,0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Page load — sidebar fades in */
+.sidebar {
+  animation: fadeIn 0.4s ease both;
+}
+
+/* Sidebar nav items — staggered slide-in on load */
+.nav-item {
+  position: relative;
+  cursor: pointer;
+  animation: fadeSlideDown 0.35s ease both;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+
+/* Topbar slides down on load */
+.topbar {
+  animation: fadeSlideDown 0.4s ease 0.1s both;
+}
+
+/* Stat cards — staggered pop-in on load */
+.stat-card {
+  animation: fadeSlideUp 0.45s ease both;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+.stat-grid .stat-card:nth-child(1) { animation-delay: 0.15s; }
+.stat-grid .stat-card:nth-child(2) { animation-delay: 0.25s; }
+.stat-grid .stat-card:nth-child(3) { animation-delay: 0.35s; }
+.stat-grid .stat-card:nth-child(4) { animation-delay: 0.45s; }
+
+.stat-card:hover {
+  border-color: var(--blue-accent);
+  box-shadow: 0 6px 20px rgba(127, 128, 134, 0.13);
+  transform: translateY(-3px);
+}
+
+.stat-card .value { transition: color 0.2s ease; }
+
+/* Cards fade up on load */
+.card {
+  animation: fadeSlideUp 0.5s ease 0.2s both;
+  transition: box-shadow 0.25s ease;
+}
+.card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
 
 /* Breakdown item hover */
 .breakdown-item {
   border-radius: 6px;
   padding: 4px 6px;
-  transition: background 0.15s;
   cursor: default;
+  transition: background 0.18s ease;
 }
-.breakdown-item:hover {
-  background: var(--gray-light);
-}
-.breakdown-item.highlight {
-  background: var(--gray-light);
-}
+.breakdown-item:hover { background: var(--gray-light); }
+.breakdown-item.highlight { background: var(--gray-light); }
+.breakdown-item .dot { transition: transform 0.18s ease; }
+.breakdown-item:hover .dot { transform: scale(1.4); }
 
-/* Search highlight in table */
-tbody tr.hidden {
-  display: none;
-}
-.tx-match mark {
-  background: #fef08a;
-  border-radius: 2px;
-  padding: 0 2px;
-  font-weight: 500;
-}
+/* Search */
+tbody tr.hidden { display: none; }
+.search-wrap input { transition: background 0.2s ease; }
+.search-wrap:focus-within { background: #e8edf5; }
 
-/* Chart toggle buttons */
-.chart-toggle {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 4px;
-}
-.chart-toggle button {
-  font-size: 11px;
-  font-family: inherit;
-  padding: 3px 10px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-}
-.chart-toggle button.active {
-  background: var(--navy);
-  color: #fff;
-  border-color: var(--navy);
-}
 
-/* Inline "Schedule Transfer" form */
+/* Schedule Transfer form */
 .add-transfer-form {
-  display: none;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  gap: 0;
+  transition: grid-template-rows 0.3s ease, gap 0.3s ease, padding 0.3s ease;
+  padding: 0;
+  border-top: 0px solid var(--border);
+}
+.add-transfer-form > .form-inner {
+  overflow: hidden;
+  display: flex;
   flex-direction: column;
   gap: 8px;
+  min-height: 0;
+}
+.add-transfer-form.open {
+  grid-template-rows: 1fr;
   padding: 12px 0 4px;
   border-top: 1px solid var(--border);
 }
-.add-transfer-form.open {
-  display: flex;
-}
-
 .add-transfer-form input,
 .add-transfer-form select {
   font-family: inherit;
   font-size: 13px;
-  padding: 7px 10px;
+  padding: 7px 5px;
   border: 1px solid var(--border);
   border-radius: 7px;
   outline: none;
   color: var(--text);
   background: var(--gray-light);
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 .add-transfer-form input:focus,
 .add-transfer-form select:focus {
   border-color: var(--blue-accent);
   background: #fff;
+  box-shadow: 0 0 0 3px rgba(45,76,200,0.10);
 }
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 110px;
-  gap: 8px;
-}
-.add-transfer-form .btn-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 2px;
-}
+.form-row { display: grid; grid-template-columns: 1fr 110px; gap: 8px; }
+.add-transfer-form .btn-row { display: flex; gap: 8px; margin-top: 2px; }
 .add-transfer-form .btn-save {
-  flex: 1;
-  padding: 7px;
-  background: var(--navy);
-  color: #fff;
-  border: none;
-  border-radius: 7px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
+  flex: 1; padding: 7px; background: var(--navy); color: #fff;
+  border: none; border-radius: 7px; font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background 0.2s ease, transform 0.15s ease;
 }
-.add-transfer-form .btn-save:hover {
-  background: var(--blue-accent);
-}
+.add-transfer-form .btn-save:hover { background: var(--blue-accent); transform: scale(1.02); }
 .add-transfer-form .btn-cancel {
-  padding: 7px 14px;
-  background: transparent;
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  font-family: inherit;
-  font-size: 13px;
-  cursor: pointer;
+  padding: 7px 14px; background: transparent; color: var(--text-muted);
+  border: 1px solid var(--border); border-radius: 7px; font-family: inherit; font-size: 13px;
+  cursor: pointer; transition: background 0.2s ease, color 0.2s ease;
 }
+.add-transfer-form .btn-cancel:hover { background: var(--gray-light); color: var(--text); }
 
-/* Transaction row expand */
-tbody tr {
+/* Add transfer button */
+.add-transfer { display: flex; align-items: center; gap: 12px; padding: 10px 0; cursor: pointer; transition: opacity 0.2s ease; }
+.add-transfer:hover { opacity: 0.7; }
+.add-transfer .plus-circle { transition: transform 0.2s ease, border-color 0.2s ease; }
+.add-transfer:hover .plus-circle { transform: rotate(90deg); border-color: var(--blue-accent); }
+
+/* New payment item pop-in */
+.payment-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  transition: background 0.18s ease;
+}
+.payment-item:hover { background: var(--gray-light); }
+.payment-item.new-item { animation: popIn 0.35s ease both; }
+
+/* Transaction rows */
+tbody tr.tx-row {
   cursor: pointer;
+  transition: background 0.18s ease;
 }
-tbody tr:hover {
-  background: #f8fafc;
-}
-.tx-detail-row {
-  cursor: default !important;
-}
-.tx-detail-row:hover {
-  background: transparent !important;
-}
-.tx-detail-row td {
-  padding: 0 !important;
-  border-bottom: 1px solid var(--border);
-}
+tbody tr.tx-row:hover { background: #f8fafc; }
+.tx-detail-row { cursor: default !important; }
+.tx-detail-row:hover { background: transparent !important; }
+.tx-detail-row td { padding: 0 !important; border-bottom: 1px solid var(--border); }
 .tx-detail-inner {
   overflow: hidden;
   max-height: 0;
@@ -690,25 +735,22 @@ tbody tr:hover {
   display: flex;
   gap: 24px;
   background: #f8fafc;
+  transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
 }
-.tx-detail-inner.open {
-  max-height: 60px;
-  padding: 10px 12px;
-}
-.tx-detail-inner span strong {
-  color: var(--text);
-  font-weight: 600;
-}
+.tx-detail-inner.open { max-height: 60px; padding: 10px 12px; opacity: 1; }
+.tx-detail-inner span strong { color: var(--text); font-weight: 600; }
 
-/* Nav item tooltip */
-.nav-item {
-  position: relative;
-}
+/* Row amount hover highlight */
+.tx-row:hover .tx-amount { color: #c0392b; }
+.tx-amount { transition: color 0.18s ease; }
+
+/* Nav tooltip */
 .nav-tip {
   position: absolute;
   left: calc(100% + 10px);
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(-4px);
   background: var(--navy-light);
   color: #fff;
   font-size: 11px;
@@ -717,9 +759,10 @@ tbody tr:hover {
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 200;
 }
-
+.nav-item:hover .nav-tip { opacity: 1; transform: translateY(-50%) translateX(0); }
 
 /* FOOTER */
 footer {
