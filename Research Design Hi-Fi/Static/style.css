@@ -83,6 +83,22 @@ body {
   height: 20px;
 }
 
+.animated:hover{
+  color: #fff;
+}
+
+.animated:hover svg {
+  display: none;
+}
+
+.animated:hover::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url("images/keyframe-tick.png") center / contain no-repeat;
+  display: block;
+}
+
 /* TOPBAR */
 .topbar {
   position: fixed;
@@ -718,6 +734,87 @@ tbody tr:hover {
   opacity: 0;
   pointer-events: none;
   z-index: 200;
+}
+
+.chart-wrap canvas,
+.bar-chart-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 1200px) {
+  .topbar {
+    padding: 0 48px;
+  }
+
+  .main {
+    padding: 32px 48px 80px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .topbar {
+    padding: 0 20px;
+  }
+
+  .main {
+    padding: 24px 20px 70px;
+  }
+
+  .mid-row,
+  .bot-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .chart-wrap {
+    height: 220px;
+  }
+
+  .bar-chart-wrap {
+    height: 240px;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar-right {
+    gap: 8px;
+  }
+
+  .search-wrap {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .main {
+    padding: 20px 14px 64px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stat-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .card,
+  .tx-card {
+    padding: 16px;
+  }
+
+  .chart-wrap {
+    height: 180px;
+  }
+
+  .bar-chart-wrap {
+    height: 200px;
+  }
 }
 
 

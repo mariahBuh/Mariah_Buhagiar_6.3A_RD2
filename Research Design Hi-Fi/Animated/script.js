@@ -1,4 +1,12 @@
-// ── SIDEBAR NAV ───────────────────────────────────
+// -- Switch to static
+const animatedNavItem = document.querySelector('.nav-item[data-nav="Animated"]');
+if (animatedNavItem) {
+  animatedNavItem.addEventListener('click', () => {
+    window.location.href = '../Static/index.html';
+  });
+}
+
+// -- SIDEBAR NAV
 document.querySelectorAll('.nav-item[data-nav]').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -6,7 +14,7 @@ document.querySelectorAll('.nav-item[data-nav]').forEach(item => {
   });
 });
 
-// ── STAT CARDS ────────────────────────────────────
+// -- STAT CARDS
 document.querySelectorAll('.stat-card').forEach(card => {
   card.addEventListener('click', () => {
     const wasSelected = card.classList.contains('selected');
@@ -15,7 +23,7 @@ document.querySelectorAll('.stat-card').forEach(card => {
   });
 });
 
-// ── SEARCH ────────────────────────────────────────
+// -- SEARCH
 document.getElementById('searchInput').addEventListener('input', function() {
   const q = this.value.trim().toLowerCase();
   document.querySelectorAll('.tx-row').forEach(row => {
@@ -34,7 +42,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
   });
 });
 
-// ── TRANSACTION ROW EXPAND ────────────────────────
+// -- TRANSACTION ROW EXPAND
 document.querySelectorAll('.tx-row').forEach(row => {
   row.addEventListener('click', () => {
     const id = row.dataset.id;
@@ -46,7 +54,7 @@ document.querySelectorAll('.tx-row').forEach(row => {
   });
 });
 
-// ── SCHEDULE TRANSFER ─────────────────────────────
+// -- SCHEDULE TRANSFER
 const addBtn    = document.getElementById('addTransferBtn');
 const form      = document.getElementById('transferForm');
 const cancelBtn = document.getElementById('tf-cancel');
@@ -86,13 +94,13 @@ saveBtn.addEventListener('click', () => {
   cancelBtn.click();
 });
 
-// ── BREAKDOWN BAR ─────────────────────────────────
+// -- BREAKDOWN BAR
 const bar = document.querySelector('.breakdown-bar');
 if (bar) {
   const segments = [
-    { color:'#f97316', pct:38 }, { color:'#eab308', pct:22 }, { color:'#f59e0b', pct:12 },
-    { color:'#22c55e', pct:9  }, { color:'#0dbfad', pct:8  }, { color:'#3b82f6', pct:6  },
-    { color:'#94a3b8', pct:5  },
+    { color:'#f97316', pct:37 }, { color:'#eab308', pct:11 }, { color:'#f59e0b', pct:9  },
+    { color:'#22c55e', pct:7  }, { color:'#0dbfad', pct:23 }, { color:'#3b82f6', pct:6  },
+    { color:'#94a3b8', pct:7  },
   ];
   bar.style.cssText = 'background:none;display:flex;overflow:hidden;height:8px;border-radius:4px;';
   bar.innerHTML = segments.map((s, i) =>
@@ -115,7 +123,7 @@ if (bar) {
   });
 }
 
-// ── LINE CHART + PERIOD TOGGLE ────────────────────
+// -- LINE CHART + PERIOD TOGGLE
 const lineCtx = document.getElementById('lineChart').getContext('2d');
 const gradient = lineCtx.createLinearGradient(0, 0, 0, 160);
 gradient.addColorStop(0, 'rgba(31,44,115,0.13)');
@@ -124,7 +132,7 @@ gradient.addColorStop(1, 'rgba(255,255,255,0.01)');
 const periods = {
   monthly: {
     labels: ['1 Apr','','','','','6 Apr','','','','','11 Apr','','','','','16 Apr','','','','','21 Apr','','23 Apr','','','26 Apr','','','','30 Apr'],
-    data:   [30,35,45,60,72,90,110,130,155,175,210,230,270,310,320,330,350,370,390,410,430,450,470,null,null,null,null,null,null,null],
+    data:   [30,35,45,60,72,90,110,130,155,175,210,270,340,370,440,490,550,570,590,610,630,650,700,null,null,null,null,null,null,null],
     dotIdx: 22
   }
 };
@@ -166,9 +174,9 @@ const lineChart = new Chart(lineCtx, {
           callback: function(val, i) { return this.chart.data.labels[i]; }
         }
       },
-      y: { display: false, min: 0 }
+      y: { display: false, min: 0, grace: '10%' }
     },
-    animation: { duration: 600, easing: 'easeInOutQuart' }
+    animation: false
   }
 });
 
@@ -187,11 +195,11 @@ document.querySelectorAll('.chart-toggle button').forEach(btn => {
     lineChart.data.datasets[0].pointBorderColor     = pts.colors;
     lineChart.data.datasets[0].pointRadius          = pts.radii;
     lineChart.data.datasets[0].pointHoverRadius     = pts.radii.map(r => r ? r+2 : 0);
-    lineChart.update();
+    lineChart.update('none');
   });
 });
 
-// ── BAR CHART ─────────────────────────────────────
+// -- BAR CHART
 const barCtx = document.getElementById('barChart').getContext('2d');
 new Chart(barCtx, {
   type: 'bar',
