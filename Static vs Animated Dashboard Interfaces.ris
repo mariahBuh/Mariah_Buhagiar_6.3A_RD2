@@ -1,0 +1,145 @@
+TY  - JOUR
+TI  - Dashboard Design Patterns
+AU  - Bach, Benjamin
+AU  - Freeman, Euan
+AU  - Abdul-Rahman, Alfie
+AU  - Turkay, Cagatay
+AU  - Khan, Saiful
+AU  - Fan, Yulei
+AU  - Chen, Min
+T2  - IEEE Transactions on Visualization and Computer Graphics
+DA  - 2022///
+PY  - 2022
+DO  - 10.1109/TVCG.2022.3209448
+DP  - DOI.org (Crossref)
+SP  - 1
+EP  - 11
+J2  - IEEE Trans. Visual. Comput. Graphics
+SN  - 1077-2626, 1941-0506, 2160-9306
+UR  - https://ieeexplore.ieee.org/document/9903550/
+Y2  - 2026/05/09/14:39:11
+L1  - https://eprints.gla.ac.uk/281864/1/281864.pdf
+N1  - <div data-schema-version="9"><p>This study was useful for understanding dashboard structure, layout organisation, and visual hierarchy. It supports the decision to keep both dashboard versions consistent in layout and content so that animation remained the main variable being tested.</p>
+</div>
+KW  - Dashboard Design
+KW  - Design Patterns
+KW  - Visual Hierarchy
+KW  - Dashboard Layout
+KW  - Data Visualisation
+KW  - HCI
+ER  - 
+
+TY  - JOUR
+TI  - A Comparative Research on Usability and User Experience of User Interface Design Software
+AU  - Wang, Junfeng
+AU  - Xu, Zhiyu
+AU  - Wang, Xi
+AU  - Lu, Jingjing
+T2  - International Journal of Advanced Computer Science and Applications
+DA  - 2022///
+PY  - 2022
+DO  - 10.14569/IJACSA.2022.0130804
+DP  - DOI.org (Crossref)
+VL  - 13
+IS  - 8
+J2  - IJACSA
+LA  - en
+SN  - 21565570, 2158107X
+UR  - http://thesai.org/Publications/ViewPaper?Volume=13&Issue=8&Code=IJACSA&SerialNo=4
+Y2  - 2026/05/09/14:39:29
+L1  - https://thesai.org/Downloads/Volume13No8/Paper_4-A_Comparative_Research_on_Usability_and_User_Experience.pdf
+N1  - <div data-schema-version="9"><p>This study was useful for understanding comparative usability evaluation methods. It supports the use of interface comparison to analyse differences in usability and user experience between static and animated dashboards.</p>
+</div>
+KW  - UX
+KW  - UI Design
+KW  - Usability
+KW  - Engagement
+KW  - HCI
+KW  - Comparative Study
+KW  - Evaluation Methods
+ER  - 
+
+TY  - JOUR
+TI  - Digital Infographics Design (Static vs Dynamic): Its Effects on Developing Thinking and Cognitive Load Reduction
+AU  - Shemy, Nader Said
+T2  - International Journal of Learning, Teaching and Educational Research
+AB  - The current study investigates the effect of the difference between two styles of infographics (static vs. dynamic) on developing visual thinking and reducing the cognitive load of grade six students in their science course. The researcher relied on the quasi-experimental design. The random sample population included 40 students who were divided into two equal experimental groups: the first group of students was exposed to static infographics, while the second was exposed to dynamic infographics. The experimental treatment of independent variables was done by Wepik and Vyond web applications. Data were collected by two tools, a Visual Thinking Test (prepared by the researcher) and a Cognitive Load Scale (NASA-TLX). The results indicated that there was a significant impact of dynamic infographics on developing students’ visual thinking and reducing their cognitive load compared with static infographics. This can be attributed to the diverse stimuli and multimedia elements that dynamic infographics provide, which are compatible with the students’ tendencies and abilities, as well as their learning, cognitive and perception styles. Furthermore, the presentation of concepts in a sequential and orderly manner can allow for in-depth understanding and assimilation with a limited cognitive load.
+DA  - 2022/05/30/
+PY  - 2022
+DO  - 10.26803/ijlter.21.5.6
+DP  - DOI.org (Crossref)
+VL  - 21
+IS  - 5
+SP  - 104
+EP  - 125
+J2  - IJLTER
+SN  - 16942493, 16942116
+ST  - Digital Infographics Design (Static vs Dynamic)
+UR  - https://ijlter.org/index.php/ijlter/article/view/5155/pdf
+Y2  - 2026/05/09/14:39:41
+L1  - https://ijlter.org/index.php/ijlter/article/download/5155/pdf
+N1  - <div data-schema-version="9"><p>This study was useful for exploring how static and dynamic visual presentation affects user perception and interpretation. It supports the discussion on how animation can improve engagement but also increase distraction.</p>
+</div>
+KW  - Static vs Dynamic
+KW  - Visual Presentation
+KW  - Animation
+KW  - Information Design
+KW  - User Understanding
+ER  - 
+
+TY  - JOUR
+TI  - Creating design guidelines for building city dashboards from a user's perspectives
+AU  - Young, Gareth W.
+AU  - Kitchin, Rob
+T2  - International Journal of Human-Computer Studies
+DA  - 2020/08//
+PY  - 2020
+DO  - 10.1016/j.ijhcs.2020.102429
+DP  - DOI.org (Crossref)
+VL  - 140
+SP  - 102429
+J2  - International Journal of Human-Computer Studies
+LA  - en
+SN  - 10715819
+UR  - https://linkinghub.elsevier.com/retrieve/pii/S1071581920300331
+Y2  - 2026/05/09/14:39:54
+L1  - https://mural.maynoothuniversity.ie/14923/1/RK-Creating-2020.pdf
+N1  - <div data-schema-version="9"><p>This study was useful for understanding user-centred dashboard evaluation. It supports the use of observation and semi-structured interviews to explore how users interpret and experience dashboard interfaces.</p>
+</div>
+KW  - Usability
+KW  - Engagement
+KW  - Dashboard Design
+KW  - User-centred Design
+KW  - Design Guidelines
+ER  - 
+
+TY  - JOUR
+TI  - User perception of animation fluency: The effect of time duration in different phases of animated transitions during application usage
+AU  - Ge, Yan
+AU  - Chen, Hongyu
+AU  - Wang, Yuchen
+AU  - Qu, Weina
+AU  - Zhang, Yubo
+AU  - Liu, Yanfang
+T2  - International Journal of Human-Computer Studies
+DA  - 2024/06//
+PY  - 2024
+DO  - 10.1016/j.ijhcs.2024.103257
+DP  - DOI.org (Crossref)
+VL  - 186
+SP  - 103257
+J2  - International Journal of Human-Computer Studies
+LA  - en
+SN  - 10715819
+ST  - User perception of animation fluency
+UR  - https://linkinghub.elsevier.com/retrieve/pii/S1071581924000417
+Y2  - 2026/05/09/14:40:13
+N1  - <div data-schema-version="9"><p>This study was useful for understanding how animation timing and movement influence user perception and interaction. It supports the discussion on animation fluency and engagement within dashboard interfaces.</p>
+</div>
+KW  - Usability
+KW  - Animation
+KW  - Transition Timing
+KW  - Dashboard Interpretation
+KW  - User Experience
+ER  - 
+
