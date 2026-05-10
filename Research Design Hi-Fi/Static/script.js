@@ -1,4 +1,4 @@
-// -- Switch to animated
+// Switch to animated
 const animatedNavItem = document.querySelector('.nav-item[data-nav="Animated"]');
 if (animatedNavItem) {
   animatedNavItem.addEventListener('click', () => {
@@ -6,7 +6,7 @@ if (animatedNavItem) {
   });
 }
 
-// -- SIDEBAR NAV
+// SIDEBAR NAV
 document.querySelectorAll('.nav-item[data-nav]').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -14,7 +14,7 @@ document.querySelectorAll('.nav-item[data-nav]').forEach(item => {
   });
 });
 
-// -- STAT CARDS 
+//  STAT CARDS 
 document.querySelectorAll('.stat-card').forEach(card => {
   card.addEventListener('click', () => {
     const wasSelected = card.classList.contains('selected');
@@ -23,7 +23,7 @@ document.querySelectorAll('.stat-card').forEach(card => {
   });
 });
 
-// -- SEARCH 
+// SEARCH 
 document.getElementById('searchInput').addEventListener('input', function() {
   const q = this.value.trim().toLowerCase();
   document.querySelectorAll('.tx-row').forEach(row => {
@@ -42,7 +42,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
   });
 });
 
-// -- TRANSACTION ROW 
+// TRANSACTION ROW 
 document.querySelectorAll('.tx-row').forEach(row => {
   row.addEventListener('click', () => {
     const id = row.dataset.id;
@@ -54,7 +54,7 @@ document.querySelectorAll('.tx-row').forEach(row => {
   });
 });
 
-// -- SCHEDULE TRANSFER 
+// SCHEDULE TRANSFER 
 const addBtn    = document.getElementById('addTransferBtn');
 const form      = document.getElementById('transferForm');
 const cancelBtn = document.getElementById('tf-cancel');
@@ -72,6 +72,7 @@ cancelBtn.addEventListener('click', () => {
   document.getElementById('tf-recur').value  = '';
 });
 
+// Handle saving a new scheduled transfer
 saveBtn.addEventListener('click', () => {
   const name   = document.getElementById('tf-name').value.trim();
   const amount = document.getElementById('tf-amount').value.trim();
@@ -95,7 +96,7 @@ saveBtn.addEventListener('click', () => {
 });
 
 
-// -- BREAKDOWN BAR 
+// BREAKDOWN BAR 
 const bar = document.querySelector('.breakdown-bar');
 if (bar) {
   const segments = [
@@ -124,7 +125,7 @@ if (bar) {
   });
 }
 
-// -- LINE CHART 
+// LINE CHART 
 const lineCtx = document.getElementById('lineChart').getContext('2d');
 const gradient = lineCtx.createLinearGradient(0, 0, 0, 160);
 gradient.addColorStop(0, 'rgba(31,44,115,0.13)');
@@ -149,6 +150,7 @@ let activePeriod = 'monthly';
 const p0   = periods['monthly'];
 const pts0 = makePts(p0.data, p0.dotIdx);
 
+// Create the line chart with initial data and styles
 const lineChart = new Chart(lineCtx, {
   type: 'line',
   data: {
@@ -181,6 +183,7 @@ const lineChart = new Chart(lineCtx, {
   }
 });
 
+// Handle period toggle button clicks
 document.querySelectorAll('.chart-toggle button').forEach(btn => {
   btn.addEventListener('click', () => {
     const period = btn.dataset.period;
@@ -200,7 +203,7 @@ document.querySelectorAll('.chart-toggle button').forEach(btn => {
   });
 });
 
-// -- BAR CHART
+// BAR CHART
 const barCtx = document.getElementById('barChart').getContext('2d');
 new Chart(barCtx, {
   type: 'bar',

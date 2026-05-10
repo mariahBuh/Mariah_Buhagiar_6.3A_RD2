@@ -1,3 +1,4 @@
+/* RESET — remove default browser spacing and use border-box sizing */
 *,
 *::before,
 *::after {
@@ -6,6 +7,7 @@
   padding: 0;
 }
 
+/* DESIGN TOKENS — global colour palette and layout constants */
 :root {
   --navy: #1a2657;
   --navy-light: #243070;
@@ -22,7 +24,7 @@
   --text: #1e293b;
   --text-muted: #64748b;
   --white: #ffffff;
-  --sidebar-w: 60px;
+  --sidebar-w: 60px;   /* fixed sidebar width — used for main content offset */
   --card-radius: 6px;
 }
 
@@ -552,6 +554,8 @@ tbody td {
 }
 
 /* ── ANIMATIONS & INTERACTIONS ── */
+/* All entrance animations use CSS animations triggered on page load.
+   Hover interactions use CSS transitions for performance. */
 
 /* Keyframes */
 @keyframes fadeSlideDown {
@@ -604,7 +608,7 @@ tbody td {
   animation: fadeSlideDown 0.4s ease 0.1s both;
 }
 
-/* Stat cards — staggered pop-in on load */
+/* Stat cards — staggered pop-in on load; each card delayed slightly more than the last */
 .stat-card {
   animation: fadeSlideUp 0.45s ease both;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
@@ -717,7 +721,7 @@ tbody tr.hidden { display: none; }
 .payment-item:hover { background: var(--gray-light); }
 .payment-item.new-item { animation: popIn 0.35s ease both; }
 
-/* Transaction rows */
+/* Transaction rows — click to expand detail panel; max-height trick enables CSS transition */
 tbody tr.tx-row {
   cursor: pointer;
   transition: background 0.18s ease;
@@ -728,7 +732,7 @@ tbody tr.tx-row:hover { background: #f8fafc; }
 .tx-detail-row td { padding: 0 !important; border-bottom: 1px solid var(--border); }
 .tx-detail-inner {
   overflow: hidden;
-  max-height: 0;
+  max-height: 0; /* collapsed state */
   padding: 0 12px;
   font-size: 12px;
   color: var(--text-muted);
@@ -738,7 +742,7 @@ tbody tr.tx-row:hover { background: #f8fafc; }
   transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
   opacity: 0;
 }
-.tx-detail-inner.open { max-height: 60px; padding: 10px 12px; opacity: 1; }
+.tx-detail-inner.open { max-height: 60px; padding: 10px 12px; opacity: 1; } /* expanded state */
 .tx-detail-inner span strong { color: var(--text); font-weight: 600; }
 
 /* Row amount hover highlight */
@@ -787,6 +791,7 @@ tbody tr.tx-row:hover { background: #f8fafc; }
   height: 100% !important;
 }
 
+/* RESPONSIVE — tablet and mobile breakpoints */
 @media (max-width: 1200px) {
   .topbar {
     padding: 0 48px;
@@ -797,7 +802,7 @@ tbody tr.tx-row:hover { background: #f8fafc; }
   }
 
   .stat-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2-column grid on medium screens */
   }
 }
 
@@ -812,7 +817,7 @@ tbody tr.tx-row:hover { background: #f8fafc; }
 
   .mid-row,
   .bot-row {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr); /* stack columns on smaller screens */
   }
 
   .chart-wrap {
@@ -862,7 +867,7 @@ tbody tr.tx-row:hover { background: #f8fafc; }
   }
 }
 
-/* FOOTER */
+/* FOOTER — offset by sidebar width to sit flush with the main content area */
 footer {
   background: var(--navy);
   color: rgba(255, 255, 255, 0.6);

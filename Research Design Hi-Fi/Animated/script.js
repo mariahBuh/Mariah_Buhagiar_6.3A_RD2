@@ -1,4 +1,4 @@
-// -- Switch to static
+// Switch to static version when the bottom nav icon is clicked
 const animatedNavItem = document.querySelector('.nav-item[data-nav="Animated"]');
 if (animatedNavItem) {
   animatedNavItem.addEventListener('click', () => {
@@ -6,7 +6,7 @@ if (animatedNavItem) {
   });
 }
 
-// -- SIDEBAR NAV
+// SIDEBAR NAV
 document.querySelectorAll('.nav-item[data-nav]').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -14,16 +14,16 @@ document.querySelectorAll('.nav-item[data-nav]').forEach(item => {
   });
 });
 
-// -- STAT CARDS
+// STAT CARDS — clicking a card selects it; clicking again deselects
 document.querySelectorAll('.stat-card').forEach(card => {
   card.addEventListener('click', () => {
-    const wasSelected = card.classList.contains('selected');
+    const wasSelected = card.classList.contains('selected'); // remember state before clearing
     document.querySelectorAll('.stat-card').forEach(c => c.classList.remove('selected'));
-    if (!wasSelected) card.classList.add('selected');
+    if (!wasSelected) card.classList.add('selected'); // only re-select if it wasn't already active
   });
 });
 
-// -- SEARCH
+// SEARCH
 document.getElementById('searchInput').addEventListener('input', function() {
   const q = this.value.trim().toLowerCase();
   document.querySelectorAll('.tx-row').forEach(row => {
@@ -42,19 +42,19 @@ document.getElementById('searchInput').addEventListener('input', function() {
   });
 });
 
-// -- TRANSACTION ROW EXPAND
+// TRANSACTION ROW EXPAND 
 document.querySelectorAll('.tx-row').forEach(row => {
   row.addEventListener('click', () => {
     const id = row.dataset.id;
     const inner = document.getElementById('inner-' + id);
     if (!inner) return;
     const isOpen = inner.classList.contains('open');
-    document.querySelectorAll('.tx-detail-inner').forEach(el => el.classList.remove('open'));
-    if (!isOpen) inner.classList.add('open');
+    document.querySelectorAll('.tx-detail-inner').forEach(el => el.classList.remove('open')); // close all
+    if (!isOpen) inner.classList.add('open'); // open clicked row (unless it was already open)
   });
 });
 
-// -- SCHEDULE TRANSFER
+// SCHEDULE TRANSFER
 const addBtn    = document.getElementById('addTransferBtn');
 const form      = document.getElementById('transferForm');
 const cancelBtn = document.getElementById('tf-cancel');
@@ -76,9 +76,10 @@ saveBtn.addEventListener('click', () => {
   const name   = document.getElementById('tf-name').value.trim();
   const amount = document.getElementById('tf-amount').value.trim();
   const due    = document.getElementById('tf-due').value;
+  // Highlight missing required fields in red
   document.getElementById('tf-name').style.borderColor   = name   ? '' : '#ef4444';
   document.getElementById('tf-amount').style.borderColor = amount ? '' : '#ef4444';
-  if (!name || !amount) return;
+  if (!name || !amount) return; // bail out if validation fails
   const item = document.createElement('div');
   item.className = 'payment-item new-item';
   item.innerHTML = `
@@ -94,9 +95,10 @@ saveBtn.addEventListener('click', () => {
   cancelBtn.click();
 });
 
-// -- BREAKDOWN BAR
+// BREAKDOWN BAR 
 const bar = document.querySelector('.breakdown-bar');
 if (bar) {
+  // Each segment matches a category in the breakdown list below
   const segments = [
     { color:'#f97316', pct:37 }, { color:'#eab308', pct:11 }, { color:'#f59e0b', pct:9  },
     { color:'#22c55e', pct:7  }, { color:'#0dbfad', pct:23 }, { color:'#3b82f6', pct:6  },
@@ -109,6 +111,7 @@ if (bar) {
 
   const items = document.querySelectorAll('.breakdown-item');
 
+  // Dim all segments except the hovered one 
   function dimAll()  { bar.querySelectorAll('[data-seg]').forEach(s => s.style.opacity = '0.3'); }
   function resetAll(){ bar.querySelectorAll('[data-seg]').forEach(s => s.style.opacity = '1'); }
 
@@ -123,20 +126,23 @@ if (bar) {
   });
 }
 
-// -- LINE CHART + PERIOD TOGGLE
+// LINE CHART + PERIOD TOGGLE 
 const lineCtx = document.getElementById('lineChart').getContext('2d');
+// Gradient fill fades from navy tint at top to transparent at bottom
 const gradient = lineCtx.createLinearGradient(0, 0, 0, 160);
 gradient.addColorStop(0, 'rgba(31,44,115,0.13)');
 gradient.addColorStop(1, 'rgba(255,255,255,0.01)');
 
+// Data per time period 
 const periods = {
   monthly: {
     labels: ['1 Apr','','','','','6 Apr','','','','','11 Apr','','','','','16 Apr','','','','','21 Apr','','23 Apr','','','26 Apr','','','','30 Apr'],
     data:   [30,35,45,60,72,90,110,130,155,175,210,270,340,370,440,490,550,570,590,610,630,650,700,null,null,null,null,null,null,null],
-    dotIdx: 22
+    dotIdx: 22 // index of the current-day marker dot
   }
 };
 
+// Helper to generate point styles with only the current period's dot visible
 function makePts(data, dotIdx) {
   return {
     radii:  data.map((v, i) => (i === dotIdx && v !== null ? 5 : 0)),
@@ -148,6 +154,7 @@ let activePeriod = 'monthly';
 const p0   = periods['monthly'];
 const pts0 = makePts(p0.data, p0.dotIdx);
 
+// Create the line chart with initial data and styles
 const lineChart = new Chart(lineCtx, {
   type: 'line',
   data: {
@@ -158,7 +165,7 @@ const lineChart = new Chart(lineCtx, {
       fill: true, backgroundColor: gradient, tension: 0.15,
       pointBackgroundColor: pts0.colors, pointBorderColor: pts0.colors,
       pointRadius: pts0.radii, pointHoverRadius: pts0.radii.map(r => r ? r+2 : 0),
-      spanGaps: false
+      spanGaps: false // prevents the line from connecting across null (future) values
     }]
   },
   options: {
@@ -176,10 +183,15 @@ const lineChart = new Chart(lineCtx, {
       },
       y: { display: false, min: 0, grace: '10%' }
     },
-    animation: false
+    animation: {
+      duration: 1200,
+      easing: 'easeInOutQuart',
+      x: { duration: 1200, from: 0 }
+    }
   }
 });
 
+// Handle period toggle button clicks
 document.querySelectorAll('.chart-toggle button').forEach(btn => {
   btn.addEventListener('click', () => {
     const period = btn.dataset.period;
@@ -199,7 +211,7 @@ document.querySelectorAll('.chart-toggle button').forEach(btn => {
   });
 });
 
-// -- BAR CHART
+// BAR CHART
 const barCtx = document.getElementById('barChart').getContext('2d');
 new Chart(barCtx, {
   type: 'bar',

@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Finance Dashboard</title>
 <link rel="stylesheet" href="style.css">
+<!-- Google Fonts: DM Sans for UI text, DM Mono for numeric values -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Chart.js CDN — used for the line chart and bar chart -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- Main script deferred so it runs after the DOM is fully parsed -->
 <script src="script.js" defer></script>
 </head>
 
@@ -201,6 +204,7 @@
         </div>
       </div>
 
+      <!-- Schedule Transfer form — hidden by default, toggled open by JS -->
       <div class="add-transfer-form" id="transferForm">
         <div class="form-inner">
           <div class="form-row">
@@ -232,13 +236,14 @@
     <!-- Monthly Income vs Expenses -->
     <div class="card">
       <div class="card-title">Monthly Income vs Expenses</div>
+      <!-- Canvas sized by CSS via .bar-chart-wrap; Chart.js renders into it -->
       <div class="bar-chart-wrap">
         <canvas id="barChart"></canvas>
       </div>
     </div>
   </div>
 
-  <!-- TRANSACTION HISTORY -->
+  <!-- TRANSACTION HISTORY — rows are clickable to expand a detail panel -->
   <div class="card tx-card">
     <div class="card-title">Transaction History</div>
     <table>
@@ -251,6 +256,7 @@
           <th style="text-align:right">Currency</th>
         </tr>
       </thead>
+      <!-- data-id links each row to its hidden detail panel; data-cat/desc are used by the search filter -->
       <tbody>
         <tr class="tx-row" data-id="1" data-cat="Beauty" data-desc="Haircut Skincare Products">
           <td><div class="tx-cat"><div class="tx-icon" style="background:#fce7f3;"><img src="images/beauty.png" alt="Beauty Icon" style="width:50%;height:50%;"></div><span>Beauty</span></div></td>
